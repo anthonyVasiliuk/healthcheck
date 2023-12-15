@@ -2,9 +2,6 @@
     "name": "anthonyvasiliuk/healthcheck",
     "description": "HealthCheck",
     "type": "library",
-    "require": {
-        "laravel/laravel": "^10.2"
-    },
     "prefer-stable": true,
     "license": "MIT",
     "minimum-stability": "dev",
