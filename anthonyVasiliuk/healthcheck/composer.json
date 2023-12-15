@@ -1,5 +1,5 @@
 {
-    "name": "gedisa/healthcheck",
+    "name": "anthonyvasiliuk/healthcheck",
     "description": "HealthCheck",
     "type": "library",
     "require": {
