@@ -12,7 +12,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AnthonyVasiliuk\\HealthCheck\\Tests\\": "tests"
+            "AnthonyVasiliuk\\HealthCheck\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -33,6 +33,13 @@
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AnthonyVasiliuk\\HealthCheck\\HealthCheckProvider"
+            ]
         }
     }
 }
