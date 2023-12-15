@@ -1,9 +1,17 @@
 <?php
 
+namespace AnthonyVasiliuk\HealthCheck\Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Orchestra\Testbench\TestCase as Orchestra;
+use AnthonyVasiliuk\HealthCheck\Providers\HealthCheckProvider;
 
-abstract class TestCase extends BaseTestCase
+
+class TestCase extends Orchestra
 {
-    use \Tests\CreatesApplication;
+    protected function getPackageProviders($app)
+    {
+        return [
+            HealthCheckProvider::class,
+        ];
+    }
 }

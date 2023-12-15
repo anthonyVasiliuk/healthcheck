@@ -1,4 +1,5 @@
 <?php
 
-uses(Tests\TestCase::class)->in('Unit');
-uses(Tests\TestCase::class)->in('Feature');
+use AnthonyVasiliuk\HealthCheck\Tests\TestCase;
+
+uses(TestCase::class)->in( __DIR__ );
