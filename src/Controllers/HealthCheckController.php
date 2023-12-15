@@ -1,6 +1,6 @@
 <?php
 
-namespace anthonyvasiliuk\healthcheck\src\Controllers;
+namespace anthonyvasiliuk\healthcheck\Controllers;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
