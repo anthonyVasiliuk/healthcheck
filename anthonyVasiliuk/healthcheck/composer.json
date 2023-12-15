@@ -6,6 +6,7 @@
         "laravel/laravel": "^10.2"
     },
     "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Gedisa\\Healthcheck\\": "src/"

@@ -1,6 +1,6 @@
 <?php
 
-use Gedisa\Healthcheck\Controllers\HealthCheckController;
+use healthcheck\src\Controllers\HealthCheckController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/healthcheck', [HealthCheckController::class, 'healthCheck']);

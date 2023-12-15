@@ -1,6 +1,6 @@
 <?php
 
-namespace Gedisa\Healthcheck\Controllers;
+namespace healthcheck\src\Controllers;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use function Gedisa\Healthcheck\Controllers\collect;
+use function Gedisa\Healthcheck\Controllers\config;
+use function Gedisa\Healthcheck\Controllers\response;
 
 class HealthCheckController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gedisa\Healthcheck\Providers;
+namespace healthcheck\src\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
