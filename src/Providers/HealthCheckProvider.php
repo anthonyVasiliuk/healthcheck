@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Providers;
+namespace anthonyvasiliuk\healthcheck\src\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
