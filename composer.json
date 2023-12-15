@@ -38,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AnthonyVasiliuk\\HealthCheck\\HealthCheckProvider"
+                "AnthonyVasiliuk\\HealthCheck\\Providers\\HealthCheckProvider"
             ]
         }
     }
