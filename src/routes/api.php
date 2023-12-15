@@ -1,6 +1,6 @@
 <?php
 
-use healthcheck\src\Controllers\HealthCheckController;
 use Illuminate\Support\Facades\Route;
+use src\Controllers\HealthCheckController;
 
 Route::get('/healthcheck', [HealthCheckController::class, 'healthCheck']);
