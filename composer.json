@@ -7,7 +7,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Gedisa\\Healthcheck\\": "src/"
+            "AnthonyVasiliuk\\Healthcheck\\": "src/"
         }
     },
     "authors": [
