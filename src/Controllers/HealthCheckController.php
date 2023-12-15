@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use function Gedisa\Healthcheck\Controllers\collect;
-use function Gedisa\Healthcheck\Controllers\config;
-use function Gedisa\Healthcheck\Controllers\response;
+use function AnthonyVasiliuk\Healthcheck\Controllers\collect;
+use function AnthonyVasiliuk\Healthcheck\Controllers\config;
+use function AnthonyVasiliuk\Healthcheck\Controllers\response;
 
 class HealthCheckController
 {
