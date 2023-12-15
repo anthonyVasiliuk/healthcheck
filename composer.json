@@ -1,0 +1,20 @@
+{
+    "name": "gedisa/healthcheck",
+    "description": "HealthCheck",
+    "type": "library",
+    "require": {
+        "laravel/laravel": "^10.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gedisa\\Healthcheck\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "anton.v",
+            "email": "anton.v@northitgroup.eu"
+        }
+    ]
+}
