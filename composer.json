@@ -5,9 +5,6 @@
     "prefer-stable": true,
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {
-        "laravel/laravel": "10.*"
-    },
     "autoload": {
         "psr-4": {
             "AnthonyVasiliuk\\HealthCheck\\": "src/"
