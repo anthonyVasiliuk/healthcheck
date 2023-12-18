@@ -49,7 +49,7 @@ class HealthCheckController
         try {
             DB::connection()->getPdo();
 
-            return DB::connection()->getDatabaseName() === config('database.connections.mysql.database');
+            return DB::connection()->getDatabaseName() === $this->getDefaultDatabaseConnection();
         } catch (Exception $exception) {
             Log::error($exception->getMessage());
 
@@ -66,5 +66,15 @@ class HealthCheckController
 
             return false;
         }
+    }
+
+    private function getDefaultDatabaseConnection()
+    {
+        return match (config('database.default'))
+            {
+                'sqlite' => config('database.connections.sqlite.database'),
+                'mysql' => config('database.connections.mysql.database'),
+                'pgsql' => config('database.connections.pgsql.database'),
+        };
     }
 }
