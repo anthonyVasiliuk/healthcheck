@@ -7,7 +7,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use AnthonyVasiliuk\HealthCheck\Providers\HealthCheckProvider;
 
 
-class TestCase extends Orchestra
+class RedisTestCase extends Orchestra
 {
     protected function getEnvironmentSetUp($app)
     {
@@ -17,7 +17,7 @@ class TestCase extends Orchestra
             'database' => env('DB_DATABASE', ':memory:'),
         ]);
         $app['config']->set('database.redis', [
-            'client' => 'predis',
+            'client' => 'mock',
             'default' => [
                 'url' => env('REDIS_URL'),
                 'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -32,7 +32,8 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            HealthCheckProvider::class
+            HealthCheckProvider::class,
+            RedisMockServiceProvider::class
         ];
     }
 }

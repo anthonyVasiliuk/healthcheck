@@ -7,7 +7,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use AnthonyVasiliuk\HealthCheck\Providers\HealthCheckProvider;
 
 
-class TestCase extends Orchestra
+class FailedTestCase extends Orchestra
 {
     protected function getEnvironmentSetUp($app)
     {
@@ -16,23 +16,12 @@ class TestCase extends Orchestra
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', ':memory:'),
         ]);
-        $app['config']->set('database.redis', [
-            'client' => 'predis',
-            'default' => [
-                'url' => env('REDIS_URL'),
-                'host' => env('REDIS_HOST', '127.0.0.1'),
-                'username' => env('REDIS_USERNAME'),
-                'password' => env('REDIS_PASSWORD'),
-                'port' => env('REDIS_PORT', '6379'),
-                'database' => env('REDIS_DB', '0'),
-            ]
-        ]);
         $app['config']->set('sentry.dsn', 'https://examplePublicKey@o0.ingest.sentry.io/');
     }
     protected function getPackageProviders($app): array
     {
         return [
-            HealthCheckProvider::class
+            HealthCheckProvider::class,
         ];
     }
 }
