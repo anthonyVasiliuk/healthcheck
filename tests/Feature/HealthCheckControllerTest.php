@@ -24,101 +24,103 @@ class HealthCheckControllerTest extends TestCase
     }
 
 
-//    public function test_has_healthcheck_redis_failed()
-//    {
-//        config()->set('database.redis.client', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertFalse($response->json()['redis']);
-//        $this->assertTrue($response->json()['database']);
-//        $this->assertTrue($response->json()['sentry']);
-//    }
+    public function test_has_healthcheck_redis_failed()
+    {
+        config()->set('database', []);
 
-//    public function test_has_healthcheck_db_failed()
-//    {
-//        config()->set('database.connections.mysql.database', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->dd()->assertStatus(503);
-//
-//        $this->assertTrue($response->json()['redis']);
-//        $this->assertFalse($response->json()['database']);
-//        $this->assertTrue($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_sentry_failed()
-//    {
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertTrue($response->json()['redis']);
-//        $this->assertTrue($response->json()['database']);
-//        $this->assertFalse($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_redis_and_db_failed()
-//    {
-//        config()->set('database.redis.default.host', 'test');
-//        config()->set('database.connections.mysql.database', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertFalse($response->json()['redis']);
-//        $this->assertFalse($response->json()['database']);
-//        $this->assertTrue($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_db_and_sentry_failed()
-//    {
-//        config()->set('database.connections.mysql.database', 'test');
-//        config()->set('sentry.dsn', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertTrue($response->json()['redis']);
-//        $this->assertFalse($response->json()['database']);
-//        $this->assertFalse($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_redis_and_sentry_failed()
-//    {
-//        config()->set('database.redis.default.host', 'test');
-//        config()->set('sentry.dsn', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertFalse($response->json()['redis']);
-//        $this->assertTrue($response->json()['database']);
-//        $this->assertFalse($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_service_unavailable()
-//    {
-//        config()->set('database.redis.default.host', 'test');
-//        config()->set('database.connections.mysql.database', 'test');
-//        config()->set('sentry.dsn', 'test');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(503);
-//
-//        $this->assertFalse($response->json()['redis']);
-//        $this->assertFalse($response->json()['database']);
-//        $this->assertFalse($response->json()['sentry']);
-//    }
-//
-//    public function test_has_healthcheck_internal_error()
-//    {
-//        config()->set('database.redis.default.host', false);
-//        config()->set('database.connections.mysql.database', false);
-//        config()->set('sentry.dsn', 'http://localhost');
-//
-//        $response = $this->get('/healthcheck');
-//        $response->assertStatus(500);
-//    }
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertFalse($response->json()['redis']);
+        $this->assertTrue($response->json()['database']);
+        $this->assertTrue($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_db_failed()
+    {
+        config()->set('database.default', 'mysql');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertTrue($response->json()['redis']);
+        $this->assertFalse($response->json()['database']);
+        $this->assertTrue($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_sentry_failed()
+    {
+        config()->set('sentry.dsn', 'test');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertTrue($response->json()['redis']);
+        $this->assertTrue($response->json()['database']);
+        $this->assertFalse($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_redis_and_db_failed()
+    {
+        config()->set('database.redis.client', 'notmock');
+        config()->set('database.default', 'mysql');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertFalse($response->json()['redis']);
+        $this->assertFalse($response->json()['database']);
+        $this->assertTrue($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_db_and_sentry_failed()
+    {
+        config()->set('database.default', 'mysql');
+        config()->set('sentry.dsn', 'test');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertTrue($response->json()['redis']);
+        $this->assertFalse($response->json()['database']);
+        $this->assertFalse($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_redis_and_sentry_failed()
+    {
+        config()->set('database.redis.default.host', 'test');
+        config()->set('sentry.dsn', 'test');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertFalse($response->json()['redis']);
+        $this->assertTrue($response->json()['database']);
+        $this->assertFalse($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_service_unavailable()
+    {
+        config()->set('database.redis.default.host', 'test');
+        config()->set('database.default', 'mysql');
+        config()->set('sentry.dsn', 'test');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(503);
+
+        $this->assertFalse($response->json()['redis']);
+        $this->assertFalse($response->json()['database']);
+        $this->assertFalse($response->json()['sentry']);
+    }
+
+    public function test_has_healthcheck_internal_error()
+    {
+        config()->set('database.redis', null);
+        config()->set('database.default', false);
+        config()->set('sentry.dsn', 'http://localhost');
+
+        $response = $this->get('/healthcheck');
+        $response->assertStatus(500);
+    }
 
 }

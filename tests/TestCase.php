@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         ]);
         $app['config']->set('sentry.dsn', 'https://examplePublicKey@o0.ingest.sentry.io/');
     }
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             HealthCheckProvider::class,
