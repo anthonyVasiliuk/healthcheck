@@ -1,0 +1,6 @@
+<?php
+
+use Gedisa\LaravelSimpleHealthCheck\Controllers\HealthCheckController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/healthcheck', [HealthCheckController::class, 'healthCheck']);

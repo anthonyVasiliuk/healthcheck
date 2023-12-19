@@ -1,0 +1,33 @@
+name: fix-style
+
+on:
+  push:
+    paths:
+      - '**.php'
+
+jobs:
+  php-code-style-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
+          ini-values: post_max_size=256M
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist
+
+      - name: Fix Style
+        run: ./vendor/bin/pint -v
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Fix styling changes

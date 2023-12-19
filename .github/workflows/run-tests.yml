@@ -1,0 +1,60 @@
+name: run-tests
+
+on:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: rootpassword
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.2, 8.3 ]
+        laravel: [ ^10.10 ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run test suite
+        run: composer test
+        env:
+          REDIS_HOST: 127.0.0.1
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: test_db
+          DB_USERNAME: user
+          DB_PASSWORD: password
