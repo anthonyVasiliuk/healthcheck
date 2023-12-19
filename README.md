@@ -4,7 +4,18 @@ The purpose of this repository is to have a Laravel package for all projects to 
 
 ## How to embed it to your project
 
-TODO
+Go to your target project and enter the following commands:
+
+     composer config 'repositories.gedisa/laravel-simple-health-check' git https://github.com/gedisa/laravel-simple-health-check.git
+     composer config minimum-stability dev
+     composer require gedisa/laravel-simple-health-check
+     
+This script will ask you for a token, because it's a private repository. You can generate this token in your [github account][3]
+Afterwards add the route to the `api.php` of your target project:
+
+    Route::get('/healthcheck', [\Gedisa\LaravelSimpleHealthCheck\Controllers\HealthCheckController::class, 'healthCheck']);
+    
+Already it should work.
 
 ## How to work locally
 
@@ -36,3 +47,4 @@ Check the [official page of Laravel Pint][2] to see more instructions.
 
 [1]: https://getcomposer.org
 [2]: https://laravel.com/docs/10.x/pint#running-pint
+[3]: https://github.com/settings/tokens
